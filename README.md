@@ -31,3 +31,11 @@ In repository Settings → Pages, choose **GitHub Actions** as the source. The D
 - How it works (`methodology.html`): data sources, currencies, delays, and model limitations.
 
 Directory links select the asset on the dashboard via `?asset=TICKER`. UK chart prices are typically in GBX; the synthetic demo explicitly uses GBP. Widget coverage and statistics availability vary by exchange.
+
+## Research tools
+
+- **Buy/Sell signals** (`signals.html`): TradingView moving-average and oscillator summaries for the selected asset and timeframe (hourly, four-hour, daily, weekly, monthly). These are technical classifications, not validated return predictions or personalised trade instructions.
+- **Market news** (`news.html`): TradingView timeline for stocks, crypto, or one exchange symbol. Provider coverage and timestamps apply.
+- **Watchlist** (`watchlist.html`): save assets in local browser storage, with links to charts, signals, and news. No cross-device sync or trading integration. Clear browser storage to remove your saved list.
+
+Live third-party content is loaded in the visitor's browser. Automated tests verify widget configuration, routing, catalog selections, watchlist persistence, and model math; they do not verify third-party quote accuracy or news coverage.

@@ -14,8 +14,8 @@ test('directory filters US, Europe, and crypto without overlap', () => {
 test('every catalog asset appears in the dashboard and all page links exist', async () => {
   const html = await readFile('public/index.html', 'utf8');
   for (const key of Object.keys(catalog)) assert.ok(html.includes(`value="${key}"`), key);
-  for (const page of ['index.html', 'stocks.html', 'crypto.html', 'methodology.html']) {
+  for (const page of ['index.html', 'stocks.html', 'crypto.html', 'methodology.html', 'signals.html', 'news.html', 'watchlist.html']) {
     const content = await readFile('public/' + page, 'utf8');
-    for (const link of ['stocks.html', 'crypto.html', 'methodology.html']) assert.ok(content.includes(`href="./${link}"`));
+    for (const link of ['stocks.html', 'crypto.html', 'methodology.html', 'signals.html', 'news.html', 'watchlist.html']) assert.ok(content.includes(`href="./${link}"`));
   }
 });
