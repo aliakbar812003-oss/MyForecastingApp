@@ -1,6 +1,8 @@
 # Market Forecast
 
-A dependency-free Node.js starter for exploring stocks and cryptocurrency using **synthetic sample prices**, with a linear trend projection. It does not fetch live prices or provide validated investment forecasts.
+A stock and crypto dashboard with embedded TradingView market charts. Apple, Microsoft, and NVIDIA use NASDAQ symbols; Bitcoin, Ethereum, and Solana use Coinbase USD pairs. TradingView controls quote availability and exchange delays. No API keys are exposed or required.
+
+The collapsible forecast demo uses **synthetic sample prices**, independently of the market widget. It does not provide forecasts from real price history or validated investment predictions.
 
 ## Develop
 
@@ -11,9 +13,11 @@ npm test
 npm start
 ```
 
-The HTTP server uses port 3000 (override with `PORT`). Choose Apple, Microsoft, NVIDIA, Bitcoin, Ethereum, or Solana and a 7-, 14-, or 30-period horizon. Stock periods represent trading sessions; crypto periods represent days. All prices are illustrative USD values.
+The HTTP server uses port 3000 (override with `PORT`). Choose Apple, Microsoft, NVIDIA, Bitcoin, Ethereum, or Solana and a 7-, 14-, or 30-period horizon. Stock periods represent trading sessions; crypto periods represent days. Prices in the forecast demo are illustrative USD values. The main chart shows provider market data.
 
-The model fits ordinary least squares to 60 deterministic observations and extrapolates, flooring negative estimates at zero. No prediction intervals are estimated. Real market data, backtesting, and forecast evaluation remain future work.
+The model fits ordinary least squares to 60 deterministic observations and extrapolates, flooring negative estimates at zero. No prediction intervals are estimated. Connecting the forecast model to historical market data, backtesting, and forecast evaluation remain future work.
+
+The market chart requires browser access to TradingView (`s3.tradingview.com` and its widget services). Content blockers or provider restrictions can prevent loading; the app includes an external TradingView link as a fallback. Loading the embed connects the browser to TradingView.
 
 ## GitHub Pages
 
