@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 const routes = { '/': ['index.html', 'text/html'], '/app.js': ['app.js', 'text/javascript'], '/style.css': ['style.css', 'text/css'] };
+for (const file of ['stocks.html', 'crypto.html', 'methodology.html', 'markets.js', 'catalog.js']) routes['/' + file] = [file, file.endsWith('.html') ? 'text/html' : 'text/javascript'];
 http.createServer(async (req, res) => {
   const route = routes[new URL(req.url, 'http://localhost').pathname];
   if (!route) { res.writeHead(404); res.end('Not found'); return; }
