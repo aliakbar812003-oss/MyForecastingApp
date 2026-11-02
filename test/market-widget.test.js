@@ -6,8 +6,8 @@ test('market widget uses selected exchange symbol and leaves sample forecasts se
     return { children: [], textContent: '', value: '', listeners: {}, append(child) { this.children.push(child); }, replaceChildren() { this.children = []; }, contains(child) { return this.children.includes(child); }, setAttribute(k,v) { this[k] = v; }, addEventListener(event, fn) { this.listeners[event] = fn; } };
   }
   const nodes = new Map();
-  for (const id of ['asset', 'horizon', 'live-title', 'provider-link', 'live-chart', 'price', 'symbol', 'target', 'change', 'chart-title', 'chart', 'market-meta', 'quote-data', 'technical-data']) nodes.set('#' + id, element());
-  nodes.get('#asset').value = 'AAPL'; nodes.get('#horizon').value = '7';
+  for (const id of ['asset', 'horizon', 'live-title', 'provider-link', 'live-chart', 'price', 'symbol', 'target', 'change', 'chart-title', 'chart', 'market-meta', 'quote-data', 'technical-data', 'chart-interval', 'market-tape', 'dashboard-news']) nodes.set('#' + id, element());
+  nodes.get('#asset').value = 'AAPL'; nodes.get('#horizon').value = '7'; nodes.get('#chart-interval').value = 'D';
   globalThis.window = { location: { search: '?asset=INVALID' } };
   globalThis.document = { querySelector: selector => nodes.get(selector), createElement: element };
   try {
@@ -25,6 +25,11 @@ test('market widget uses selected exchange symbol and leaves sample forecasts se
       if (asset === 'SHEL') { assert.match(nodes.get('#symbol').textContent, /GBP/); assert.match(nodes.get('#market-meta').textContent, /GBX/); }
       assert.match(nodes.get('#symbol').textContent, /Synthetic/);
     }
+    nodes.get('#chart-interval').value = 'W';
+    nodes.get('#chart-interval').listeners.change();
+    assert.equal(JSON.parse(currentScript().textContent).interval, 'W');
+    assert.equal(JSON.parse(nodes.get('#dashboard-news').children[0].children[1].textContent).symbol, 'NASDAQ:NVDA');
+    assert.equal(JSON.parse(nodes.get('#market-tape').children[0].children[1].textContent).symbols.length, 7);
     currentScript().onerror();
     assert.match(nodes.get('#live-chart').children[0].textContent, /unavailable/);
   } finally { delete globalThis.document; delete globalThis.window; }

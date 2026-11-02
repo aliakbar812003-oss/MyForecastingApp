@@ -39,3 +39,9 @@ Directory links select the asset on the dashboard via `?asset=TICKER`. UK chart 
 - **Watchlist** (`watchlist.html`): save assets in local browser storage, with links to charts, signals, and news. No cross-device sync or trading integration. Clear browser storage to remove your saved list.
 
 Live third-party content is loaded in the visitor's browser. Automated tests verify widget configuration, routing, catalog selections, watchlist persistence, and model math; they do not verify third-party quote accuracy or news coverage.
+
+## Chart workspace
+
+The dashboard has a full-width chart layout, provider ticker strip, chart timeframe selector, searchable market sidebar, symbol overview, selected-asset news, and technical analysis. The sidebar filters US stocks, Europe, crypto, or your saved assets. The save button shares the watchlist’s browser storage. Selecting an asset updates contextual news/signals links and the URL. Other research pages use the same dark theme.
+
+Local Chromium checks verified desktop/mobile layout, deep links, market search, symbol switching, watchlist save/filter, and chart timeframe changes. Third-party scripts were stubbed during these UI checks; external widget rendering and provider data accuracy were not validated by that check.
