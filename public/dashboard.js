@@ -3,7 +3,7 @@ import { readWatchlist, toggleWatchlist } from './watchlist.js';
 export function sidebarAssets(query, market, saved = []) {
   const term = query.trim().toLocaleLowerCase();
   return Object.entries(catalog).filter(([ticker,item]) => {
-    const matches = market === 'all' || item.region === market || (market === 'Europe' && !['US','Crypto'].includes(item.region)) || (market === 'saved' && saved.includes(ticker));
+    const matches = market === 'all' || item.assetClass === market || (market === 'Crypto' && item.assetClass === 'crypto') || (market === 'US' && item.assetClass === 'stock' && item.region === 'US') || (market === 'Europe' && item.assetClass === 'stock' && !['US','Crypto'].includes(item.region)) || (market === 'saved' && saved.includes(ticker));
     return matches && `${ticker} ${item.name} ${item.symbol}`.toLocaleLowerCase().includes(term);
   });
 }

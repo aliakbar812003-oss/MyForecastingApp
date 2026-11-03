@@ -1,11 +1,11 @@
-import { catalog } from './catalog.js';
+import { catalog, assetClasses } from './catalog.js';
 export function filterAssets(kind, query = '', region = 'all') {
   const term = query.trim().toLocaleLowerCase();
   return Object.entries(catalog).filter(([ticker, item]) => {
-    const isCrypto = item.region === 'Crypto';
-    return (kind === 'crypto' ? isCrypto : !isCrypto)
-      && (region === 'all' || item.region === region || (region === 'Europe' && item.region !== 'US' && !isCrypto))
-      && `${ticker} ${item.name} ${item.region} ${item.symbol}`.toLocaleLowerCase().includes(term);
+    const expectedClass = kind === 'stocks' ? 'stock' : kind;
+    return item.assetClass === expectedClass
+      && (region === 'all' || item.region === region || (region === 'Europe' && !['US', 'Crypto', 'Global', 'FX'].includes(item.region)))
+      && `${ticker} ${item.name} ${item.region} ${item.symbol} ${assetClasses[item.assetClass]}`.toLocaleLowerCase().includes(term);
   });
 }
 if (typeof document !== 'undefined') {
@@ -16,7 +16,7 @@ if (typeof document !== 'undefined') {
     const rows = document.querySelector('#asset-rows'); rows.replaceChildren();
     for (const [ticker, item] of results) {
       const row = document.createElement('tr');
-      for (const value of [item.name, ticker, item.region, item.symbol.split(':')[0]]) {
+      for (const value of [item.name, ticker, item.region, item.symbol.split(':')[0], assetClasses[item.assetClass], item.quoteUnit || (item.region === 'UK' ? 'GBX / share' : item.currency)]) {
         const cell = document.createElement('td'); cell.textContent = value; row.append(cell);
       }
       const cell = document.createElement('td'), link = document.createElement('a');

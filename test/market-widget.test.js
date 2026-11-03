@@ -15,7 +15,7 @@ test('market widget uses selected exchange symbol and leaves sample forecasts se
     const currentScript = () => nodes.get('#live-chart').children[0].children[1];
     assert.equal(JSON.parse(currentScript().textContent).symbol, 'NASDAQ:AAPL');
     assert.equal(currentScript().src, 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js');
-    for (const [asset, symbol] of [['ASML', 'EURONEXT:ASML'], ['SAP', 'XETR:SAP'], ['SHEL', 'LSE:SHEL'], ['NOVN', 'SIX:NOVN'], ['NOVO_B', 'OMXCOP:NOVO_B'], ['BTC', 'COINBASE:BTCUSD'], ['ETH', 'COINBASE:ETHUSD'], ['SOL', 'COINBASE:SOLUSD'], ['MSFT', 'NASDAQ:MSFT'], ['NVDA', 'NASDAQ:NVDA']]) {
+    for (const [asset, symbol] of [['SPY', 'AMEX:SPY'], ['SXR8', 'XETR:SXR8'], ['GOLD', 'COMEX:GC1!'], ['WTI', 'NYMEX:CL1!'], ['EURUSD', 'FX:EURUSD'], ['USDJPY', 'FX:USDJPY'], ['ASML', 'EURONEXT:ASML'], ['SAP', 'XETR:SAP'], ['SHEL', 'LSE:SHEL'], ['NOVN', 'SIX:NOVN'], ['NOVO_B', 'OMXCOP:NOVO_B'], ['BTC', 'COINBASE:BTCUSD'], ['ETH', 'COINBASE:ETHUSD'], ['SOL', 'COINBASE:SOLUSD'], ['MSFT', 'NASDAQ:MSFT'], ['NVDA', 'NASDAQ:NVDA']]) {
       nodes.get('#asset').value = asset;
       nodes.get('#asset').listeners.change();
       assert.equal(JSON.parse(currentScript().textContent).symbol, symbol);

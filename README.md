@@ -1,6 +1,6 @@
 # Market Forecast
 
-A stock and crypto dashboard with embedded TradingView market charts. The catalog includes 20 US stocks, 25 European stocks, and six Coinbase USD crypto pairs. Charts, quote statistics, and technical analysis follow the selected exchange symbol. TradingView controls quote availability and exchange delays. No API keys are exposed or required.
+A stock and crypto dashboard with embedded TradingView market charts. The catalog includes 20 US stocks, 25 European stocks, six Coinbase USD crypto pairs, 20 exchange-traded funds/products, 10 continuous commodity futures, and six forex pairs (87 instruments total). Charts, quote statistics, and technical analysis follow the selected exchange symbol. TradingView controls quote availability and exchange delays. No API keys are exposed or required.
 
 The collapsible forecast demo uses **synthetic sample prices**, independently of the market widget. It does not provide forecasts from real price history or validated investment predictions.
 
@@ -42,6 +42,14 @@ Live third-party content is loaded in the visitor's browser. Automated tests ver
 
 ## Chart workspace
 
-The dashboard has a full-width chart layout, provider ticker strip, chart timeframe selector, searchable market sidebar, symbol overview, selected-asset news, and technical analysis. The sidebar filters US stocks, Europe, crypto, or your saved assets. The save button shares the watchlist’s browser storage. Selecting an asset updates contextual news/signals links and the URL. Other research pages use the same dark theme.
+The dashboard has a full-width chart layout, provider ticker strip, chart timeframe selector, searchable market sidebar, symbol overview, selected-asset news, and technical analysis. The sidebar filters US stocks, European stocks, crypto, ETFs, commodity futures, forex, or your saved assets. The save button shares the watchlist’s browser storage. Selecting an asset updates contextual news/signals links and the URL. Other research pages use the same dark theme.
 
 Local Chromium checks verified desktop/mobile layout, deep links, market search, symbol switching, watchlist save/filter, and chart timeframe changes. Third-party scripts were stubbed during these UI checks; external widget rendering and provider data accuracy were not validated by that check.
+
+## Additional asset classes
+
+- ETFs/products (`etfs.html`): US broad-market and international equity funds; bond ETFs AGG/BND/TLT/LQD; gold/silver trusts; USO oil fund; UK/German UCITS funds. Fund shares are not direct holdings in an index, bond, or barrel of oil.
+- Commodities (`commodities.html`): gold, silver, copper, platinum, WTI, Brent, natural gas, corn, wheat, and coffee, using continuous futures symbols (`1!`). These are rolled chart series, not spot quotes or individual contracts. Rolls, expiration, margin, and contract size matter. The UI shows provider quote units.
+- Forex (`forex.html`): EUR/USD, GBP/USD, USD/JPY, USD/CHF, AUD/USD, and USD/CAD. Units are quote currency per base currency; FX feed pricing is source-specific.
+
+Every new instrument is available in chart selection, signals, asset news (where supported), and watchlists. The stock directory and US/Europe sidebar stock filters exclude ETFs and other asset classes. Provider widget availability and delays may vary, particularly for futures and funds. The sample model remains synthetic and its currency amounts do not represent futures contract sizes or provider commodity quote units.
