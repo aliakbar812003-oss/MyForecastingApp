@@ -3,11 +3,11 @@ import { mountWidget } from './widgets.js';
 export function newsConfig(scope, ticker = 'AAPL') {
   if (!['stocks', 'crypto', 'asset'].includes(scope)) throw new Error('Unknown news scope');
   if (scope === 'asset' && !Object.hasOwn(catalog, ticker)) throw new Error('Unknown asset');
-  return { ...(scope === 'asset' ? { feedMode: 'symbol', symbol: catalog[ticker].symbol } : { feedMode: 'market', market: scope === 'crypto' ? 'crypto' : 'stock' }), colorTheme: 'dark', isTransparent: true, displayMode: 'regular', width: '100%', height: 650, locale: 'en' };
+  return { ...(scope === 'asset' ? { feedMode: 'symbol', symbol: catalog[ticker].symbol } : { feedMode: 'market', market: scope === 'crypto' ? 'crypto' : 'stock' }), colorTheme: 'dark', isTransparent: false, displayMode: 'regular', width: '100%', height: 650, locale: 'en' };
 }
 export function signalConfig(ticker, interval) {
   if (!Object.hasOwn(catalog, ticker) || !['1h', '4h', '1D', '1W', '1M'].includes(interval)) throw new Error('Invalid analysis selection');
-  return { symbol: catalog[ticker].symbol, interval, width: '100%', height: 450, showIntervalTabs: true, displayMode: 'multiple', locale: 'en', colorTheme: 'dark', isTransparent: true };
+  return { symbol: catalog[ticker].symbol, interval, width: '100%', height: 450, showIntervalTabs: true, displayMode: 'multiple', locale: 'en', colorTheme: 'dark', isTransparent: false };
 }
 if (typeof document !== 'undefined' && document.querySelector('#insights-asset')) {
   const asset = document.querySelector('#insights-asset'), timeframe = document.querySelector('#timeframe'), scope = document.querySelector('#news-scope');

@@ -20,9 +20,9 @@ if (typeof document !== 'undefined') {
     document.querySelector('#provider-link').href = 'https://www.tradingview.com/chart/?symbol=' + encodeURIComponent(symbol);
     document.querySelector('#market-meta').textContent = selected.region + ' · ' + symbol + ' · Chart prices use the exchange currency' + (selected.region === 'UK' ? ' (UK shares are typically quoted in GBX/pence).' : '.');
     mountWidget('#live-chart', 'embed-widget-advanced-chart.js', { autosize: true, symbol, interval: document.querySelector('#chart-interval')?.value || 'D', timezone: 'Etc/UTC', theme: 'dark', style: '1', locale: 'en', allow_symbol_change: false, calendar: false, support_host: 'https://www.tradingview.com' });
-    mountWidget('#quote-data', 'embed-widget-symbol-info.js', { symbol, width: '100%', locale: 'en', colorTheme: 'dark', isTransparent: true });
-    mountWidget('#technical-data', 'embed-widget-technical-analysis.js', { symbol, interval: '1D', width: '100%', height: 420, showIntervalTabs: true, displayMode: 'single', locale: 'en', colorTheme: 'dark', isTransparent: true });
-    if (document.querySelector('#dashboard-news')) mountWidget('#dashboard-news', 'embed-widget-timeline.js', { feedMode: 'symbol', symbol, colorTheme: 'dark', isTransparent: true, displayMode: 'regular', width: '100%', height: 420, locale: 'en' });
+    mountWidget('#quote-data', 'embed-widget-symbol-info.js', { symbol, width: '100%', locale: 'en', colorTheme: 'dark', isTransparent: false });
+    mountWidget('#technical-data', 'embed-widget-technical-analysis.js', { symbol, interval: '1D', width: '100%', height: 420, showIntervalTabs: true, displayMode: 'single', locale: 'en', colorTheme: 'dark', isTransparent: false });
+    if (document.querySelector('#dashboard-news')) mountWidget('#dashboard-news', 'embed-widget-timeline.js', { feedMode: 'symbol', symbol, colorTheme: 'dark', isTransparent: false, displayMode: 'regular', width: '100%', height: 420, locale: 'en' });
   }
   const asset = document.querySelector('#asset'), horizon = document.querySelector('#horizon');
   const requestedAsset = new URLSearchParams(window.location.search).get('asset');
@@ -44,6 +44,6 @@ if (typeof document !== 'undefined') {
     document.querySelector('#chart').innerHTML = `<desc id="chart-description">${asset.value}: 60 synthetic observations and ${future.length} projected periods, ending at ${money.format(target)}.</desc>${grid}<line class="divider" x1="${x(59)}" x2="${x(59)}" y1="25" y2="280"/><path class="history" d="${path(history, 0)}"/><path class="projection" d="${path([latest, ...future], 59)}"/><text x="85" y="310">1</text><text x="${x(59)}" y="310" text-anchor="middle">60 · forecast begins</text><text x="875" y="310" text-anchor="end">${all.length}</text>`;
   }
   document.querySelector('#chart-interval')?.addEventListener('change', renderMarket);
-  if (document.querySelector('#market-tape')) mountWidget('#market-tape', 'embed-widget-ticker-tape.js', { symbols: ['NASDAQ:AAPL', 'NASDAQ:NVDA', 'NASDAQ:MSFT', 'EURONEXT:ASML', 'XETR:SAP', 'COINBASE:BTCUSD', 'COINBASE:ETHUSD'].map(proName => ({ proName })), showSymbolLogo: true, isTransparent: true, displayMode: 'adaptive', colorTheme: 'dark', locale: 'en' });
+  if (document.querySelector('#market-tape')) mountWidget('#market-tape', 'embed-widget-ticker-tape.js', { symbols: ['NASDAQ:AAPL', 'NASDAQ:NVDA', 'NASDAQ:MSFT', 'EURONEXT:ASML', 'XETR:SAP', 'COINBASE:BTCUSD', 'COINBASE:ETHUSD'].map(proName => ({ proName })), showSymbolLogo: true, isTransparent: false, displayMode: 'adaptive', colorTheme: 'dark', locale: 'en' });
   asset.addEventListener('change', () => { renderMarket(); render(); }); horizon.addEventListener('change', render); renderMarket(); render();
 }
